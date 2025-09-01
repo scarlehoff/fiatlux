@@ -29,15 +29,16 @@ jobs:
       matrix:
         platform: [ubuntu-latest, macos-14]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install GNU Fortran
         uses: fortran-lang/setup-fortran@v1
         with:
           version: 13
-      - uses: pypa/cibuildwheel@v2.16
+      - uses: pypa/cibuildwheel@v3.1.4
         env:
-          CIBW_ARCHS_MACOS: auto x86_64 arm64
+          CIBW_ARCHS_MACOS: auto arm64
           CIBW_SKIP: pp* cp36-* *-musllinux_x86_64 *_i686
+          MACOSX_DEPLOYMENT_TARGET: "14.0"
       - name: Verify clean directory
         run: git diff --exit-code
         shell: bash
@@ -54,7 +55,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [ubuntu-latest, macos-14]
-        python-version: ["3.10"]
+        python-version: ["3.13"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
