@@ -6,7 +6,3 @@ requires = [
     "scikit-build>=0.15.0",
 ]
 build-backend = "setuptools.build_meta"
-
-[tool.cibuildwheel]
-# The only missing wheel at the moment is 3.13
-build = "cp313-*"
